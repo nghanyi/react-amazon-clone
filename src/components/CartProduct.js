@@ -1,6 +1,7 @@
 import React from 'react';
 import './CartProduct.css';
 import { useStateValue } from '../StateProvider';
+import CurrencyFormat from 'react-currency-format';
 
 function CartProduct({ id, image, title, price, rating, hideButton }) {
     const [{ basket }, dispatch] = useStateValue();
@@ -21,7 +22,16 @@ function CartProduct({ id, image, title, price, rating, hideButton }) {
                 <p className="cartProduct__title">{title}</p>
                 <p className="cartProduct__price">
                     <small>$</small>
-                    <strong>{price}</strong>
+                    <CurrencyFormat
+                        renderText={(value) => (
+                            <strong>{value}</strong>
+                        )}
+                        decimalScale={2}
+                        fixedDecimalScale={true}
+                        value={price}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                    />
                 </p>
                 <div className="cartProduct__rating">
                     {Array(rating)
